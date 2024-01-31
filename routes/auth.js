@@ -61,10 +61,7 @@ router.post("/createUser",
 
             user.save()
                 .then(() => {
-
-
-                    //making a jwt token
-
+                    //making a jwt tokens
                     //this is the data that we want to store in the token
                     //it can be anything
                     const data = {
@@ -98,12 +95,13 @@ router.post("/login",
 
         //if there are errors then we are simply rejecting the request
         if (!result.isEmpty()) {
-            res.send({ errors: result.array() });
+            res.status(400).send({ errors: result.array() });
         }
         else {
 
             //destructuring the request 
             const { email, password } = req.body;
+
 
             const user = await User.findOne({ email: email });
 
